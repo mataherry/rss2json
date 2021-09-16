@@ -14,7 +14,8 @@ async function handleRequest(request) {
 //   });
   
   const { param } = new URL(request.url);
-  console.log(request.url)
+  if (param.startsWith('/')
+      console.log(param)
   return new Response(
       JSON.stringify({ param }),
       {
