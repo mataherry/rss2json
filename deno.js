@@ -6,6 +6,16 @@ async function handleRequest(request) {
   pathname = pathname.substring(pathname.indexOf('/', 10)
   //const rssurl = `https://news.google.com/rss/search?ceid=ID:id&gl=ID&hl=id-ID&q=${pathname.replace('/', '')}`
   console.log(pathname)
+  
+  return new Response(
+      JSON.stringify({ pathname }),
+      {
+        headers: {
+          "content-type": "application/json; charset=UTF-8",
+        },
+      },
+    );
+  
   const response = await fetch(pathname.replace('/',''),);
 //     "http://static.userland.com/gems/backend/rssTwoExample2.xml",
 //   );
