@@ -12,7 +12,7 @@ async function handleRequest(request) {
     isValid = false
   
   if (!isValid) {
-    const file = await Deno.readFile("./README.md")
+    const file = await Deno.readFile("./index.html")
 
     return new Response(file, {
       headers: {
