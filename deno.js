@@ -13,9 +13,10 @@ async function handleRequest(request) {
 //     },
 //   });
   
-  const response = await fetch(
-    "http://static.userland.com/gems/backend/rssTwoExample2.xml",
-  );
+  const rssurl = "https://news.google.com/rss/search?ceid=ID:id&gl=ID&hl=id-ID&q=Surabaya"
+  const response = await fetch(rssurl,);
+//     "http://static.userland.com/gems/backend/rssTwoExample2.xml",
+//   );
   
   // The .ok property of response indicates that the request is
   // sucessfull (status is in range of 200-299).
