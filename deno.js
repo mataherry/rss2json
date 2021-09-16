@@ -2,15 +2,35 @@ import { parseFeed } from "https://deno.land/x/rss/mod.ts";
 
 async function handleRequest(request) {
   var pathname = request.url;
-  pathname = pathname.substring(pathname.indexOf('/', 10))
+  
+  if (pathname.indexOf('/', 10)) < 0)
+    isValid = false
+  
+  pathname = pathname.substring(pathname.indexOf('/', 10)).replace('/','')
+  if (!pathname.startsWith("http"))
+    isValid = false
+  
+  if (!isValid) {
+    const html = `<html>
+      <p><b>Usage:</b> https://rss2json.deno.dev/{rss_url}</p>
+      <p>e.g: <a href="https://rss2json.deno.dev/https://news.google.com/rss/search?ceid=ID:id&gl=ID&hl=id-ID&q=Indonesia">
+        https://news.google.com/rss/search?ceid=ID:id&gl=ID&hl=id-ID&q=Indonesia</a>
+      </html>`;
+
+    return new Response(html, {
+      headers: {
+        // The "text/html" part implies to the client that the content is HTML
+        // and the "charset=UTF-8" part implies to the client that the content
+        // is encoded using UTF-8.
+        "content-type": "text/html; charset=UTF-8",
+      },
+    }); 
+  }
+  
   //const rssurl = `https://news.google.com/rss/search?ceid=ID:id&gl=ID&hl=id-ID&q=${pathname.replace('/', '')}`
   
-  const response = await fetch(pathname.replace('/',''),);
-//     "http://static.userland.com/gems/backend/rssTwoExample2.xml",
-//   );
+  const response = await fetch(pathname,);
   
-  // The .ok property of response indicates that the request is
-  // sucessfull (status is in range of 200-299).
   if (response.ok) {
     // response.json() method reads the body and parses it as JSON.
     // It then returns the data in JavaScript object.
@@ -20,7 +40,6 @@ async function handleRequest(request) {
     // Optional destructuring assignment
     const { entries } = await parseFeed(xml);
     
-//     const { name, login, avatar_url } = await response.json();
     return new Response(
       JSON.stringify({ result: entries }),
       {
