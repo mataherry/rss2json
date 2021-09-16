@@ -13,7 +13,7 @@ async function handleRequest(request) {
 //     },
 //   });
   
-  const param = request.url;
+  const { param } = new URL(request.url);
   
   return new Response(
       JSON.stringify({ param }),
