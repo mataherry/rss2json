@@ -15,6 +15,15 @@ async function handleRequest(request) {
   
   const param = request.url;
   
+  return new Response(
+      JSON.stringify({ param }),
+      {
+        headers: {
+          "content-type": "application/json; charset=UTF-8",
+        },
+      },
+    );
+  
   const rssurl = `https://news.google.com/rss/search?ceid=ID:id&gl=ID&hl=id-ID&q=${param.replace('/', '')}`
   const response = await fetch(rssurl,);
 //     "http://static.userland.com/gems/backend/rssTwoExample2.xml",
