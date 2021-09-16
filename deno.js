@@ -12,13 +12,9 @@ async function handleRequest(request) {
     isValid = false
   
   if (!isValid) {
-    const html = `<html>
-      <p><b>Usage:</b> https://rss2json.deno.dev/{rss_url}</p>
-      <p>e.g: <a href="https://rss2json.deno.dev/https://news.google.com/rss/search?ceid=ID:id&gl=ID&hl=id-ID&q=Indonesia">
-        https://news.google.com/rss/search?ceid=ID:id&gl=ID&hl=id-ID&q=Indonesia</a>
-      </html>`;
+    const file = await Deno.readFile("./README.md")
 
-    return new Response(html, {
+    return new Response(file, {
       headers: {
         // The "text/html" part implies to the client that the content is HTML
         // and the "charset=UTF-8" part implies to the client that the content
