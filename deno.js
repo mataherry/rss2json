@@ -1,24 +1,36 @@
+import { parseFeed } from "https://deno.land/x/rss/mod.ts";
+
 async function handleRequest(request) {
   // We pass the url as the first argument to fetch and an object with
   // additional info like headers, method, and body for POST requests as
   // the second argument. By default fetch  makes a GET request,
   // so we can skip specifying method for GET requests.
-  const response = await fetch("https://api.github.com/users/denoland", {
-    headers: {
-      // Servers use this header to decide on response body format.
-      // "application/json" implies that we accept the data in JSON format.
-      accept: "application/json",
-    },
-  });
-
+//   const response = await fetch("https://api.github.com/users/denoland", {
+//     headers: {
+//       // Servers use this header to decide on response body format.
+//       // "application/json" implies that we accept the data in JSON format.
+//       accept: "application/json",
+//     },
+//   });
+  
+  const response = await fetch(
+    "http://static.userland.com/gems/backend/rssTwoExample2.xml",
+  );
+  
   // The .ok property of response indicates that the request is
   // sucessfull (status is in range of 200-299).
   if (response.ok) {
     // response.json() method reads the body and parses it as JSON.
     // It then returns the data in JavaScript object.
-    const { name, login, avatar_url } = await response.json();
+    
+    const xml = await response.text();
+
+    // Optional destructuring assignment
+    const { entries } = await parseFeed(xml);
+    
+//     const { name, login, avatar_url } = await response.json();
     return new Response(
-      JSON.stringify({ name, username: login, avatar: avatar_url }),
+      JSON.stringify({ result: entries }),
       {
         headers: {
           "content-type": "application/json; charset=UTF-8",
