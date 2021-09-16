@@ -1,8 +1,8 @@
 import { parseFeed } from "https://deno.land/x/rss/mod.ts";
 
 async function handleRequest(request) {
-  const { pathname } = new URL(request.url);
-  
+  var pathname = request.url;
+  pathname = pathname.substring(pathname.indexOf('/', 10)
   //const rssurl = `https://news.google.com/rss/search?ceid=ID:id&gl=ID&hl=id-ID&q=${pathname.replace('/', '')}`
   console.log(pathname)
   const response = await fetch(pathname.replace('/',''),);
