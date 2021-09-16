@@ -15,7 +15,7 @@ async function handleRequest(request) {
   
   const { param } = new URL(request.url);
   
-  const rssurl = `https://news.google.com/rss/search?ceid=ID:id&gl=ID&hl=id-ID&q=${param}`
+  const rssurl = `https://news.google.com/rss/search?ceid=ID:id&gl=ID&hl=id-ID&q=${param.replace('/', '')}`
   const response = await fetch(rssurl,);
 //     "http://static.userland.com/gems/backend/rssTwoExample2.xml",
 //   );
