@@ -14,7 +14,7 @@ async function handleRequest(request) {
 //   });
   
   const { param } = new URL(request.url);
-  console.log(param)
+  console.log(request.url)
   return new Response(
       JSON.stringify({ param }),
       {
