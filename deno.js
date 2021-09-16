@@ -2,50 +2,8 @@ import { parseFeed } from "https://deno.land/x/rss/mod.ts";
 
 async function handleRequest(request) {
   const { pathname } = new URL(request.url);
-
-  console.log(pathname)
-  // Respond with HTML
-  if (pathname.startsWith("/html")) {
-    const html = `<html>
-      <p><b>Message:</b> Hello from Deno Deploy.</p>
-      </html>`;
-
-    return new Response(html, {
-      headers: {
-        // The "text/html" part implies to the client that the content is HTML
-        // and the "charset=UTF-8" part implies to the client that the content
-        // is encoded using UTF-8.
-        "content-type": "text/html; charset=UTF-8",
-      },
-    });
-  }
-
-  // Respond with JSON
-  if (pathname.startsWith("/json")) {
-    // Use stringify function to convert javascript object to JSON string.
-    const json = JSON.stringify({
-      message: "Hello from Deno Deploy",
-    });
-
-    return new Response(json, {
-      headers: {
-        "content-type": "application/json; charset=UTF-8",
-      },
-    });
-  }
   
-  const { param } = new URL(request.url);
-  console.log(`Param: ${param}`)
-  return new Response(
-      JSON.stringify({ param }),
-      {
-        headers: {
-          "content-type": "application/json; charset=UTF-8",
-        },
-      },
-    );
-  
-  const rssurl = `https://news.google.com/rss/search?ceid=ID:id&gl=ID&hl=id-ID&q=${param.replace('/', '')}`
+  const rssurl = `https://news.google.com/rss/search?ceid=ID:id&gl=ID&hl=id-ID&q=${pathname.replace('/', '')}`
   const response = await fetch(rssurl,);
 //     "http://static.userland.com/gems/backend/rssTwoExample2.xml",
 //   );
