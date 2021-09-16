@@ -3,8 +3,8 @@ import { parseFeed } from "https://deno.land/x/rss/mod.ts";
 async function handleRequest(request) {
   const { pathname } = new URL(request.url);
   
-  const rssurl = `https://news.google.com/rss/search?ceid=ID:id&gl=ID&hl=id-ID&q=${pathname.replace('/', '')}`
-  const response = await fetch(rssurl,);
+  //const rssurl = `https://news.google.com/rss/search?ceid=ID:id&gl=ID&hl=id-ID&q=${pathname.replace('/', '')}`
+  const response = await fetch(pathname.replace('/',''),);
 //     "http://static.userland.com/gems/backend/rssTwoExample2.xml",
 //   );
   
