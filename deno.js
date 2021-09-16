@@ -3,6 +3,7 @@ import { parseFeed } from "https://deno.land/x/rss/mod.ts";
 async function handleRequest(request) {
   var pathname = request.url;
   
+  var isValid = true
   if (pathname.indexOf('/', 10) < 0)
     isValid = false
   
